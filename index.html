@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SurgiVision VR - Immersive Virtual Reality Anatomy & Surgical Training</title>
+  <meta name="description" content="An advanced virtual reality platform for modern medical and Ayurveda anatomical exploration, interactive 3D visualization, and surgical procedure simulation.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="https://surgivision-vr-training.surge.sh/styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Ambient background grid and glow -->
+  <div class="ambient-grid"></div>
+  <div class="glow-overlay"></div>
+
+  <!-- Main Canvas for Three.js particles -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html#" class="logo">
+        <span class="logo-accent">SURGI</span>VISION <span class="logo-vr">VR</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#hero" class="active">Overview</a></li>
+        <li><a href="index.html#anatomy">Anatomy</a></li>
+        <li><a href="index.html#ayurveda">Ayurveda</a></li>
+        <li><a href="index.html#surgery">Surgery</a></li>
+        <li><a href="index.html#quiz">Assessment</a></li>
+        <li><a href="index.html#specs">Specs</a></li>
+      </ul>
+      <div class="nav-status">
+        <span class="status-dot green"></span>
+        <span class="status-text">XR INTERACTION: ACTIVE</span>
+      </div>
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Scroll Container -->
+  <main class="scroll-container">
+
+    <!-- Section 1: Hero -->
+    <section id="hero" class="section hero-section">
+      <div class="section-content">
+        <div class="hero-text" data-gsap="fade-up">
+          <div class="cyber-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">NEXT-GEN MEDICAL EDUCATION</span>
+          </div>
+          <h1>Immersive Surgical VR Platform</h1>
+          <p class="hero-desc">
+            SurgiVision VR bridges the gap in medical training, offering realistic three-dimensional virtual environments to explore human anatomy, practice surgical procedures repeatedly, and master Ayurvedic and modern anatomical concepts.
+          </p>
+          <div class="hero-cta-group">
+            <a href="index.html#surgery" class="btn btn-primary btn-glow">
+              <i class="fa-solid fa-gamepad"></i> Launch Simulator
+            </a>
+            <a href="index.html#ayurveda" class="btn btn-secondary">
+              <i class="fa-solid fa-leaf"></i> Explore Ayurveda Mode
+            </a>
+          </div>
+          <div class="hero-telemetry">
+            <div class="tel-item">
+              <span class="tel-label">SPATIAL ACCURACY</span>
+              <span class="tel-value" id="tel-accuracy">&lt; 0.2mm</span>
+            </div>
+            <div class="tel-item">
+              <span class="tel-label">CADAVER INDEPENDENCE</span>
+              <span class="tel-value" id="tel-independence">94.8%</span>
+            </div>
+            <div class="tel-item">
+              <span class="tel-label">XR RENDER SYNC</span>
+              <span class="tel-value" id="tel-sync">90 FPS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Anatomy Viewer -->
+    <section id="anatomy" class="section anatomy-section">
+      <div class="section-content split-layout">
+        <div class="info-panel" data-gsap="fade-right">
+          <div class="cyber-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">ANATOMY EXPLORATION</span>
+          </div>
+          <h2>Interactive 3D Body Systems</h2>
+          <p>
+            Explore a complete 3D model of the human anatomy. Walk around anatomical structures, isolate organs, inspect tissues layer by layer, and understand complex physiological relationships in an immersive VR environment.
+          </p>
+          
+          <div class="layers-control">
+            <h3>Visual System Toggles</h3>
+            <div class="layers-grid">
+              <button class="layer-btn active" data-layer="skeletal" id="btn-skeletal">
+                <i class="fa-solid fa-bone"></i> Skeleton View
+              </button>
+              <button class="layer-btn" data-layer="muscular" id="btn-muscular">
+                <i class="fa-solid fa-dumbbell"></i> Muscular System
+              </button>
+              <button class="layer-btn" data-layer="nervous" id="btn-nervous">
+                <i class="fa-solid fa-bolt"></i> Nervous System
+              </button>
+              <button class="layer-btn" data-layer="cardiovascular" id="btn-cardiovascular">
+                <i class="fa-solid fa-heart-pulse"></i> Cardiovascular
+              </button>
+              <button class="layer-btn" data-layer="respiratory" id="btn-respiratory">
+                <i class="fa-solid fa-wind"></i> Respiratory
+              </button>
+              <button class="layer-btn" data-layer="digestive" id="btn-digestive">
+                <i class="fa-solid fa-apple-whole"></i> Digestive System
+              </button>
+            </div>
+          </div>
+
+          <div class="organ-details-card glass-panel">
+            <div class="card-header">
+              <h4 id="anatomy-organ-name">Organ Study: Heart (Hridaya)</h4>
+              <span class="term-type modern">Modern & Ayurveda</span>
+            </div>
+            <div class="card-body">
+              <div class="tab-group">
+                <button class="tab-btn active" id="tab-modern-btn">Modern Science</button>
+                <button class="tab-btn" id="tab-ayur-btn">Ayurvedic Concept</button>
+              </div>
+              <div class="tab-content" id="tab-modern-content">
+                <p><strong>Function:</strong> Muscular organ that pumps blood through the blood vessels of the circulatory system. Provides oxygen and nutrients to tissues and removes metabolic waste.</p>
+                <p><strong>Nerve Supply:</strong> Vagus nerve (parasympathetic) and sympathetic trunk.</p>
+                <p><strong>Blood Supply:</strong> Coronary arteries branching from the ascending aorta.</p>
+              </div>
+              <div class="tab-content hidden" id="tab-ayur-content">
+                <p><strong>Sanskrit Term:</strong> Hridaya (हृदय) - The seat of Chetana (consciousness) and Ojas (vital energy essence).</p>
+                <p><strong>Dosha Relation:</strong> Seat of Vyana Vayu (governs blood flow/pulses) and Sadhaka Pitta (governs intelligence, courage, and emotions).</p>
+                <p><strong>Marma Significance:</strong> Hridaya is one of the three Mahamarmas (vital nodes). Injury is immediately life-threatening.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-interactive-spacer">
+          <div class="canvas-instruction">
+            <i class="fa-solid fa-circle-nodes pulse-icon"></i>
+            <span>Drag to rotate structures. Scroll to morph.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Ayurveda Integration -->
+    <section id="ayurveda" class="section ayurveda-section">
+      <div class="section-content split-layout reverse">
+        <div class="info-panel" data-gsap="fade-left">
+          <div class="cyber-badge green-badge">
+            <span class="badge-dot green"></span>
+            <span class="badge-text">TRADITIONAL SYNTHESIS</span>
+          </div>
+          <h2>Ayurveda-Focused Learning</h2>
+          <p>
+            SurgiVision VR is the first XR platform to integrate modern clinical human anatomy with Ayurvedic terminology, Marma points, and Traditional references (like Sushruta Samhita), providing a holistic medical education.
+          </p>
+
+          <div class="comparative-slider-container glass-panel">
+            <h3>Anatomical Correlation Slider</h3>
+            <p class="slider-hint">Drag the slider to correlate modern structures with Ayurveda concepts.</p>
+            
+            <div class="interactive-slider-ui">
+              <div class="slider-labels">
+                <span>Modern Medical</span>
+                <span>Traditional Ayurveda</span>
+              </div>
+              <input type="range" min="0" max="100" value="0" class="custom-range" id="ayur-slider">
+              
+              <div class="slider-display-box">
+                <div class="split-display">
+                  <div class="display-side" id="modern-display">
+                    <h5>Modern Structure</h5>
+                    <p class="display-val">Brain (Cerebrum)</p>
+                    <p class="display-detail">Central nervous control center containing cerebral cortex, hemispheres, and ventricular systems.</p>
+                  </div>
+                  <div class="display-divider"></div>
+                  <div class="display-side" id="ayur-display">
+                    <h5>Ayurvedic Equivalent</h5>
+                    <p class="display-val">Mastishka (मस्तिष्क)</p>
+                    <p class="display-detail">The seat of Prana Vayu and Tarpaka Kapha. Controls mental impulses, sensory functions, and motor signals.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-interactive-spacer">
+          <div class="canvas-instruction">
+            <i class="fa-solid fa-leaf pulse-icon"></i>
+            <span>Scroll to view neurological integration.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Surgical Simulation -->
+    <section id="surgery" class="section surgery-section">
+      <div class="section-content split-layout">
+        <div class="info-panel" data-gsap="fade-right">
+          <div class="cyber-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">SURGICAL PROCEDURES</span>
+          </div>
+          <h2>Virtual Surgical Training</h2>
+          <p>
+            Practice incisions, tissue exposure, and surgical instruments repeatedly in a risk-free VR environment. Our C#-powered interaction engine validates checklist completion and provides step-by-step guidance.
+          </p>
+          
+          <!-- Surgical Simulator UI -->
+          <div class="surgical-console glass-panel">
+            <div class="console-header">
+              <div class="console-title">
+                <i class="fa-solid fa-circle-dot red-pulse"></i>
+                <span>PROCEDURE: APPENDICES INTERVENTION (SIMULATED)</span>
+              </div>
+              <div class="console-score">ACCURACY: <span id="surg-acc-val">100%</span></div>
+            </div>
+
+            <div class="sim-steps">
+              <div class="sim-step active" data-step="1" id="step-incise">
+                <div class="step-num">01</div>
+                <div class="step-details">
+                  <h4>Abdominal Incision</h4>
+                  <p>Incision along McBurney's point</p>
+                </div>
+                <div class="step-status"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+              </div>
+              <div class="sim-step" data-step="2" id="step-expose">
+                <div class="step-num">02</div>
+                <div class="step-details">
+                  <h4>Organ Exposure</h4>
+                  <p>Retract tissue and locate the appendix</p>
+                </div>
+                <div class="step-status"><i class="fa-solid fa-lock"></i></div>
+              </div>
+              <div class="sim-step" data-step="3" id="step-clamp">
+                <div class="step-num">03</div>
+                <div class="step-details">
+                  <h4>Clamping & Resection</h4>
+                  <p>Clamp the appendiceal base and dissect</p>
+                </div>
+                <div class="step-status"><i class="fa-solid fa-lock"></i></div>
+              </div>
+            </div>
+
+            <!-- Interaction Stage inside Console -->
+            <div class="sim-stage" id="sim-stage">
+              <div class="sim-tools">
+                <button class="tool-btn active" id="tool-scalpel" title="Scalpel">
+                  <i class="fa-solid fa-signature"></i> Scalpel
+                </button>
+                <button class="tool-btn" id="tool-retractor" title="Retractor" disabled>
+                  <i class="fa-solid fa-scissors"></i> Retractor
+                </button>
+                <button class="tool-btn" id="tool-clamp" title="Clamp" disabled>
+                  <i class="fa-solid fa-toolbox"></i> Clamp Tool
+                </button>
+              </div>
+              
+              <div class="stage-viewscreen">
+                <!-- Step 1 View: Incision line -->
+                <div class="stage-content" id="stage-step-1">
+                  <div class="patient-skin">
+                    <div class="incision-guide-line" id="incision-line">
+                      <span class="drag-handle" id="scalpel-handle">
+                        <i class="fa-solid fa-hand-holding"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="stage-alert">DRAG the scalpel along the neon track to incise.</div>
+                </div>
+
+                <!-- Step 2 View: Retractor tissue -->
+                <div class="stage-content hidden" id="stage-step-2">
+                  <div class="tissue-layer" id="tissue-left"></div>
+                  <div class="tissue-layer" id="tissue-right"></div>
+                  <div class="underlying-appendix" id="appendix-target">
+                    <span class="glow-ring"></span>
+                    <i class="fa-solid fa-virus"></i>
+                  </div>
+                  <div class="stage-alert">CLICK and hold to retract the abdominal layers.</div>
+                </div>
+
+                <!-- Step 3 View: Clamping -->
+                <div class="stage-content hidden" id="stage-step-3">
+                  <div class="clamping-view">
+                    <div class="vessels-to-clamp">
+                      <div class="target-node" id="clamp-point-1"></div>
+                      <div class="target-node" id="clamp-point-2"></div>
+                    </div>
+                  </div>
+                  <div class="stage-alert">CLICK the illuminated ligation nodes to place clamps.</div>
+                </div>
+
+                <!-- Complete Screen -->
+                <div class="stage-content hidden" id="stage-complete">
+                  <div class="success-banner">
+                    <i class="fa-solid fa-circle-check success-icon animate-bounce"></i>
+                    <h3>PROCEDURE SUCCESSFUL</h3>
+                    <p>Incisions aligned, organ exposed, clamp margins verified.</p>
+                    <button class="btn btn-primary" id="btn-restart-sim">Restart Simulation</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-interactive-spacer">
+          <div class="canvas-instruction">
+            <i class="fa-solid fa-gamepad pulse-icon"></i>
+            <span>Step-by-step procedure telemetry active.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Quiz Module -->
+    <section id="quiz" class="section quiz-section">
+      <div class="section-content split-layout reverse">
+        <div class="info-panel" data-gsap="fade-left">
+          <div class="cyber-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">ASSESSMENT MODULE</span>
+          </div>
+          <h2>Real-Time Knowledge Evaluator</h2>
+          <p>
+            Evaluate your learning retention. Take quizzes covering spatial relationships, organ functions, surgical checklists, and Ayurvedic anatomy.
+          </p>
+
+          <div class="quiz-container glass-panel" id="quiz-container">
+            <div class="quiz-progress-bar">
+              <div class="progress-fill" id="quiz-progress" style="width: 25%"></div>
+            </div>
+            
+            <div class="quiz-card" id="quiz-card">
+              <div class="quiz-header">
+                <span class="quiz-index" id="quiz-number">Question 1 of 4</span>
+                <span class="quiz-type" id="quiz-category">MODERN CARDIOLOGY</span>
+              </div>
+              <h3 class="quiz-question" id="quiz-question-text">Which artery is the primary blood supply source for the cardiac myocardium?</h3>
+              
+              <div class="quiz-options" id="quiz-options-box">
+                <button class="option-btn" data-correct="false">A) Pulmonary Artery</button>
+                <button class="option-btn" data-correct="true">B) Coronary Artery</button>
+                <button class="option-btn" data-correct="false">C) Subclavian Artery</button>
+                <button class="option-btn" data-correct="false">D) Jugular Artery</button>
+              </div>
+            </div>
+
+            <!-- Quiz Results Screen -->
+            <div class="quiz-results hidden" id="quiz-results">
+              <div class="results-layout">
+                <div class="score-circle">
+                  <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <path class="circle" id="quiz-score-circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    <text x="18" y="20.35" class="percentage" id="quiz-score-percent">0%</text>
+                  </svg>
+                </div>
+                <div class="score-breakdown">
+                  <h3>Assessment Completed!</h3>
+                  <p>You scored <strong id="score-text">0 out of 4</strong></p>
+                  <p class="quiz-comment" id="quiz-comment-text">Needs clinical review. Rerun modules.</p>
+                  <div class="performance-metrics">
+                    <div class="metric-bar">
+                      <span>Anatomical Spatial Accuracy</span>
+                      <div class="progress-bar"><div class="fill" id="fill-spatial" style="width: 40%"></div></div>
+                    </div>
+                    <div class="metric-bar">
+                      <span>Ayurvedic Correlation Terminology</span>
+                      <div class="progress-bar"><div class="fill" id="fill-ayur" style="width: 40%"></div></div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" id="btn-restart-quiz">Retake Assessment</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-interactive-spacer">
+          <div class="canvas-instruction">
+            <i class="fa-solid fa-chart-simple pulse-icon"></i>
+            <span>Interactive assessment system running.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Hardware Specs & System details -->
+    <section id="specs" class="section specs-section">
+      <div class="section-content">
+        <div class="section-header" data-gsap="fade-up">
+          <div class="cyber-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">SYSTEM PARAMETERS</span>
+          </div>
+          <h2>Hardware & Software Integration</h2>
+          <p class="section-subtitle">
+            SurgiVision VR is built on modern XR technologies, optimized for high performance and low-latency rendering to avoid simulation sickness.
+          </p>
+        </div>
+
+        <div class="specs-grid" data-gsap="fade-up">
+          <!-- Hardware Card -->
+          <div class="spec-card glass-panel">
+            <div class="spec-card-icon"><i class="fa-solid fa-microchip"></i></div>
+            <h3>Hardware Specifications</h3>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <strong>Min CPU:</strong> <span>Intel i5 (Equivalent or higher)</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Min GPU:</strong> <span>NVIDIA GTX 1650 (Standard VR base)</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Min Memory:</strong> <span>8 GB RAM</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Rec CPU:</strong> <span>Intel i7 (Highly responsive physics)</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Rec GPU:</strong> <span>NVIDIA RTX 3060 or above</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Rec Memory:</strong> <span>16 GB RAM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Software Stack Card -->
+          <div class="spec-card glass-panel">
+            <div class="spec-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Development Stack</h3>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <strong>Development Engine:</strong> <span>Unity 3D</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Codebase Logic:</strong> <span>C# (Object Oriented Physics)</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>XR SDK Framework:</strong> <span>Unity XR Interaction Toolkit</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>3D Model Formats:</strong> <span>FBX, OBJ (Blender pipeline)</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Database Engine:</strong> <span>SQLite / Firebase (Progress stats)</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Audio System:</strong> <span>Spatial 3D Audio Channels</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Headsets Card -->
+          <div class="spec-card glass-panel">
+            <div class="spec-card-icon"><i class="fa-solid fa-vr-cardboard"></i></div>
+            <h3>Supported VR Headsets</h3>
+            <div class="spec-list">
+              <div class="spec-list-item">
+                <strong>Meta Quest 2 / 3:</strong> <span>Full standalone / Link cable tracking</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>HTC Vive / Pro:</strong> <span>Lighthouse base station precision tracking</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Valve Index:</strong> <span>High-fidelity finger tracking controls</span>
+              </div>
+              <div class="spec-list-item">
+                <strong>Controller Inputs:</strong> <span>Grab, Pick, Rotate, Touch, Teleport, Select</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Command-Line Interface Terminal -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="terminal-container glass-panel">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="term-dot red"></span>
+              <span class="term-dot yellow"></span>
+              <span class="term-dot green"></span>
+            </div>
+            <div class="terminal-title">surgivision_vr_core_terminal.sh</div>
+            <div class="terminal-connection"><i class="fa-solid fa-wifi"></i> SECURE LINK</div>
+          </div>
+          <div class="terminal-body" id="term-body">
+            <div class="term-line output">=== SurgiVision VR Initializing Core Systems ===</div>
+            <div class="term-line output">Loading Anatomy Dataset (Heart, Brain, Kidneys, Skeleton)... SUCCESS.</div>
+            <div class="term-line output">Loading Ayurvedic Marma & Sushruta Samhita databases... SUCCESS.</div>
+            <div class="term-line output">Connecting Unity XR Interaction modules... SUCCESS.</div>
+            <div class="term-line output">Type <span class="term-highlight">/help</span> or click command shortcuts below to interrogate database.</div>
+          </div>
+          <div class="terminal-shortcuts">
+            <button class="term-btn-shortcut" data-cmd="/about">/about</button>
+            <button class="term-btn-shortcut" data-cmd="/ayurveda">/ayurveda</button>
+            <button class="term-btn-shortcut" data-cmd="/sim">/sim_status</button>
+            <button class="term-btn-shortcut" data-cmd="/connect">/connect_institute</button>
+          </div>
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">&gt;</span>
+            <input type="text" id="terminal-input" placeholder="Enter query command (e.g. /about)..." autocomplete="off">
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-links">
+            <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i> GitHub Project</a>
+            <a href="https://surgivision-vr-training.surge.sh/documentation.html"><i class="fa-solid fa-file-invoice"></i> Documentation</a>
+            <a href="https://surgivision-vr-training.surge.sh/privacy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+          </div>
+          <p class="copyright">&copy; 2026 SurgiVision VR. Revolutionary Medical & Ayurvedic VR Instruction.</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- External CDNs -->
+  <!-- Three.js (Core WebGL) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP (Timeline/Scroll animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Main Script -->
+  <script src="https://surgivision-vr-training.surge.sh/app.js"></script>
+</body>
+</html>
