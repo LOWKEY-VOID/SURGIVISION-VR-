@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SurgiVision VR - Documentation</title>
+  <meta name="description" content="Technical documentation and project specifications reference guide for SurgiVision VR anatomy and surgical training platform.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Page Specific Style Overrides -->
+  <style>
+    .doc-container {
+      max-width: 1000px;
+      margin: 120px auto 80px auto;
+      padding: 0 20px;
+      z-index: 10;
+      position: relative;
+    }
+    
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary-cyan);
+      text-decoration: none;
+      font-family: var(--font-tech);
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+    
+    .back-btn:hover {
+      text-shadow: 0 0 10px rgba(var(--primary-cyan-rgb), 0.5);
+      transform: translateX(-5px);
+    }
+    
+    .doc-header {
+      margin-bottom: 40px;
+    }
+    
+    .doc-header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    
+    .doc-section {
+      margin-bottom: 50px;
+    }
+    
+    .doc-section h2 {
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      color: var(--primary-cyan);
+      font-size: 1.8rem;
+    }
+    
+    .doc-section h3 {
+      margin: 25px 0 12px 0;
+      color: var(--text-primary);
+      font-size: 1.25rem;
+    }
+    
+    .doc-section p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .doc-section ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+    
+    .doc-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    
+    .reference-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 25px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.8rem;
+      color: #a7f3d0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      max-height: 500px;
+      overflow-y: auto;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+    
+    .reference-box::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .reference-box::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+    
+    .highlight-span {
+      color: var(--primary-purple);
+      font-weight: 600;
+    }
+
+    .glow-term {
+      color: var(--primary-cyan);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient background elements -->
+  <div class="ambient-grid"></div>
+  <div class="glow-overlay"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-accent">SURGI</span>VISION <span class="logo-vr">VR</span>
+      </a>
+      <div class="nav-status">
+        <span class="status-dot green"></span>
+        <span class="status-text">DOCS ONLINE</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="doc-container">
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> Back to Platform Home
+    </a>
+    
+    <header class="doc-header">
+      <div class="cyber-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">TECHNICAL MANUAL</span>
+      </div>
+      <h1>SurgiVision VR Documentation</h1>
+      <p>A comprehensive system overview, anatomical training module description, and reference archives.</p>
+    </header>
+
+    <!-- Platform Description by AI -->
+    <section class="doc-section">
+      <h2>1. Platform Description</h2>
+      <p>
+        <span class="glow-term">SurgiVision VR</span> is a state-of-the-art virtual reality platform that represents a paradigm shift in medical and anatomical education. By leveraging modern real-time WebGL engine configurations, modular C# physics bindings within Unity 3D, and the Unity XR Interaction Toolkit, the platform addresses the crucial limitations of classical laboratory anatomy learning—such as the high acquisition costs of cadavers and physical simulators.
+      </p>
+      <p>
+        The platform’s architectural core is split into three core modules: the <strong>Human Anatomy Exploration Module</strong>, the <strong>Interactive Organ Study Deck</strong>, and the <strong>Surgical Procedure Sandbox</strong>. It is uniquely engineered to serve both modern Western medical students (MBBS, BDS, Nursing) and traditional Indian medicine scholars (Ayurveda BAMS). It maps complex clinical anatomical structures directly to classical concepts of <span class="highlight-span">Marma Points</span> (vital nodes), <span class="highlight-span">Dhatus</span> (tissue layers), and <span class="highlight-span">Srotas</span> (physiological pathways) referencing texts like the Sushruta Samhita.
+      </p>
+      
+      <h3>Core Learning Workflows:</h3>
+      <ul>
+        <li><strong>Anatomy Visualization:</strong> Multi-tiered layer controls allow volumetric isolation of the skeletal, muscular, nervous, cardiovascular, respiratory, and digestive networks.</li>
+        <li><strong>Organ Correlation:</strong> Side-by-side tabs offer comparative analyses between classical physiology descriptions and contemporary micro-anatomy structures.</li>
+        <li><strong>Surgical Training:</strong> Real-time coordinate checking guides students through procedural milestones (such as incision angles, tissue retraction, and ligating vessels) with automated score deduction for deviations.</li>
+      </ul>
+    </section>
+
+    <!-- Project Architecture Details -->
+    <section class="doc-section">
+      <h2>2. Project Architecture & Technical Stack</h2>
+      <p>
+        The deployment ecosystem is built on a scalable, modular framework utilizing <strong>Unity 3D</strong> as the rendering core and **C#** for spatial manipulation, tool handling, and evaluation logic.
+      </p>
+      <ul>
+        <li><strong>User Interface Layer:</strong> Responsive, high-fidelity layouts styled with premium vanilla CSS tokens, featuring hover followers, card glassmorphism, and responsive timelines.</li>
+        <li><strong>3D Mesh Formats:</strong> Optimized FBX and OBJ assets imported from Blender, maintaining low polygon counts for mobile-XR rendering targets.</li>
+        <li><strong>XR Interaction Engine:</strong> Configured using the Unity XR Interaction Toolkit, enabling natural controller mappings for Grab, Point, Rotate, and Select options.</li>
+        <li><strong>Database Integration:</strong> SQLite for secure local student profile progress, lesson completion marks, and assessment scores, with cloud sync modules via Firebase.</li>
+      </ul>
+    </section>
+
+    <!-- Attached Reference Prompt -->
+    <section class="doc-section">
+      <h2>3. Original Reference Specifications</h2>
+      <p>
+        Below is the original project configuration prompt and reference guidelines provided during the system design phase:
+      </p>
+      <div class="reference-box">
+PROJECT TITLE
+
+SurgiVision VR: Immersive Virtual Reality Platform for Human Anatomy and Surgical Training
+
+PROJECT OVERVIEW
+
+SurgiVision VR is an advanced Virtual Reality (VR) based educational platform designed to transform the way students, medical professionals, and healthcare learners understand human anatomy and surgical procedures. Traditional anatomy learning relies heavily on textbooks, static images, cadavers, and videos, which often fail to provide an immersive and interactive learning experience. SurgiVision VR bridges this gap by enabling users to explore the human body in a realistic three-dimensional virtual environment.
+
+The platform combines Virtual Reality, interactive 3D anatomy visualization, surgical procedure simulation, and educational guidance to create a highly engaging learning ecosystem. Users can walk around anatomical structures, isolate organs, inspect tissues layer by layer, and understand complex physiological relationships in an immersive environment.
+
+Unlike conventional anatomy applications, SurgiVision VR is also designed with an Ayurveda-focused learning approach, integrating modern human anatomy with Ayurvedic terminology and concepts wherever applicable. This makes the platform suitable for both modern medical education and Ayurveda students.
+
+------------------------------------------------------------
+
+PROBLEM STATEMENT
+
+Medical education faces several challenges:
+
+• Limited access to cadavers.
+• High maintenance cost of anatomy laboratories.
+• Difficulty visualizing organs in three dimensions.
+• Lack of immersive practical learning.
+• Limited opportunities for repeated surgical practice.
+• Low student engagement with traditional teaching methods.
+• Expensive surgical simulation equipment.
+• Need for safer environments to practice before real clinical exposure.
+
+Current learning methods do not provide sufficient interaction, realism, or accessibility for students to repeatedly practice anatomy and surgical procedures.
+
+------------------------------------------------------------
+
+PROPOSED SOLUTION
+
+SurgiVision VR provides a fully immersive virtual environment where users can:
+
+• Explore the complete human anatomy in 3D.
+• View organs from every angle.
+• Zoom, rotate, and isolate body parts.
+• Learn anatomical structures with interactive labels.
+• Experience realistic surgical simulations.
+• Practice procedures repeatedly without risk.
+• Receive educational guidance throughout the learning process.
+• Improve spatial understanding of anatomy.
+
+The platform minimizes dependence on physical cadavers while making medical education more interactive, engaging, and accessible.
+
+------------------------------------------------------------
+
+OBJECTIVES
+
+Primary Objectives
+
+• Build a realistic VR-based anatomy learning platform.
+• Improve medical education using immersive technology.
+• Allow safe surgical practice in virtual environments.
+• Increase student engagement through interactive learning.
+
+Secondary Objectives
+
+• Support self-paced education.
+• Reduce anatomy learning costs.
+• Improve retention through immersive visualization.
+• Provide reusable surgical simulations.
+• Integrate Ayurveda anatomical terminology.
+• Enable future AI-based learning assistance.
+
+------------------------------------------------------------
+
+TARGET USERS
+
+• Medical Students (MBBS, BDS, Nursing, Physiotherapy, Ayurveda)
+• Anatomy Professors
+• Medical Colleges & Healthcare Institutes
+
+------------------------------------------------------------
+
+CORE FEATURES
+
+1. Human Anatomy Exploration
+• Full-body 3D model
+• Layer-by-layer visualization (Skeleton, Muscle, Nerve, Cardio, Respiratory, Digestive)
+• Organ isolation
+
+2. Interactive Organ Study
+• Zoom, rotate, scale
+• Display labels, descriptions, blood and nerve supply
+• Study organ functions
+
+3. Surgical Simulation
+• Incision practice, organ exposure, instrument handling, checkpoints, and evaluation.
+
+4. Ayurveda Integration
+• Ayurvedic terminology, Dosha relations, organ concepts, and Marma nodes correlation.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content" style="gap: 20px; align-items: center; text-align: center;">
+      <p class="copyright">&copy; 2026 SurgiVision VR. Technical Manual Archives.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SurgiVision VR - Privacy Policy</title>
+  <meta name="description" content="Privacy Policy and Data Protection guidelines for SurgiVision VR educational simulators and spatial systems.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Page Specific Style Overrides -->
+  <style>
+    .doc-container {
+      max-width: 1000px;
+      margin: 120px auto 80px auto;
+      padding: 0 20px;
+      z-index: 10;
+      position: relative;
+    }
+    
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary-cyan);
+      text-decoration: none;
+      font-family: var(--font-tech);
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+    
+    .back-btn:hover {
+      text-shadow: 0 0 10px rgba(var(--primary-cyan-rgb), 0.5);
+      transform: translateX(-5px);
+    }
+    
+    .doc-header {
+      margin-bottom: 40px;
+    }
+    
+    .doc-header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    
+    .doc-section {
+      margin-bottom: 50px;
+    }
+    
+    .doc-section h2 {
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      color: var(--primary-cyan);
+      font-size: 1.8rem;
+    }
+    
+    .doc-section h3 {
+      margin: 25px 0 12px 0;
+      color: var(--text-primary);
+      font-size: 1.25rem;
+    }
+    
+    .doc-section p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    
+    .doc-section ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+    
+    .doc-section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .glow-term {
+      color: var(--primary-purple);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient background elements -->
+  <div class="ambient-grid"></div>
+  <div class="glow-overlay"></div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-accent">SURGI</span>VISION <span class="logo-vr">VR</span>
+      </a>
+      <div class="nav-status">
+        <span class="status-dot green"></span>
+        <span class="status-text">PRIVACY CORE: ONLINE</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="doc-container">
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> Back to Platform Home
+    </a>
+    
+    <header class="doc-header">
+      <div class="cyber-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">DATA INTEGRITY & ETHICS</span>
+      </div>
+      <h1>Privacy Policy</h1>
+      <p>Last Updated: July 2026. Data protection principles governing spatial tracking and clinical user profiles.</p>
+    </header>
+
+    <!-- Policy Sections -->
+    <section class="doc-section">
+      <h2>1. Introduction</h2>
+      <p>
+        At <span class="glow-term">SurgiVision VR</span>, we are committed to safeguarding the privacy and confidentiality of students, medical professionals, and academic partners utilizing our Virtual Reality anatomy and surgical simulation platform. This Privacy Policy details the metrics we compile, the security frameworks in place, and how spatial data is handled.
+      </p>
+    </section>
+
+    <section class="doc-section">
+      <h2>2. Categories of Data Collected</h2>
+      
+      <h3>A. Spatial Telemetry & Kinematics</h3>
+      <p>
+        During VR interaction sessions (including Meta Quest, HTC Vive, or Valve Index inputs), the platform processes temporary coordinate streams:
+      </p>
+      <ul>
+        <li><strong>Headset Trajectory:</strong> Six-degrees-of-freedom (6DoF) position tracking to construct virtual viewpoints and prevent simulator sickness.</li>
+        <li><strong>Controller Coordinates:</strong> Spatial vectors for tool interactions (Grab, Point, Incise, Ligate).</li>
+        <li><strong>Gesture Configurations:</strong> Skeletal finger configurations used only to trigger standard interactions on the workspace.</li>
+      </ul>
+      <p><em>Note: Spatial telemetry is processed locally in real-time and is not uploaded to external servers without explicit student permission.</em></p>
+
+      <h3>B. Assessment & Progress Indicators</h3>
+      <p>
+        To support student evaluations, the system logs academic statistics in local databases:
+      </p>
+      <ul>
+        <li>Completed lesson checkpoints (Anatomy exploration, Marma point lessons).</li>
+        <li>Surgical sandbox metrics (deviation percentages, checkpoint speeds, procedural accuracy scores).</li>
+        <li>Multiple-choice assessment score cards.</li>
+      </ul>
+
+      <h3>C. Connection Credentials</h3>
+      <p>
+        When registering for institutional access or submitting email queries via our command console interface, we store basic registration details (name, email address, school affiliation).
+      </p>
+    </section>
+
+    <section class="doc-section">
+      <h2>3. Purpose of Processing</h2>
+      <p>
+        SurgiVision VR processes compiled information to:
+      </p>
+      <ul>
+        <li>Provide real-time physics check validations during simulated surgeries.</li>
+        <li>Establish student performance analytics dashboards for academic review.</li>
+        <li>Enhance and calibrate interaction physics and 3D rendering speeds across hardware tiers.</li>
+        <li>Verify institutional subscriptions.</li>
+      </ul>
+    </section>
+
+    <section class="doc-section">
+      <h2>4. Data Storage & Security Protocols</h2>
+      <p>
+        We employ robust technical frameworks to defend your records:
+      </p>
+      <ul>
+        <li><strong>Local Isolation:</strong> All student metrics, local progress marks, and spatial records are compiled in an encrypted local **SQLite database** on the client system.</li>
+        <li><strong>Encrypted Connections:</strong> Transmission of institutional analytics to Firebase is encrypted using Secure Sockets Layer (SSL) and Transport Layer Security (TLS) certificates.</li>
+        <li><strong>Zero Commercial Sharing:</strong> SurgiVision VR does not sell, trade, or distribute student spatial telemetry or quiz records to third-party advertisers.</li>
+      </ul>
+    </section>
+
+    <section class="doc-section">
+      <h2>5. Educational Standards Compliance</h2>
+      <p>
+        SurgiVision VR is constructed to comply with international student privacy laws, including the **Family Educational Rights and Privacy Act (FERPA)**. We ensure that student assessment evaluations are only shared with authorized professors and administrative boards.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content" style="gap: 20px; align-items: center; text-align: center;">
+      <p class="copyright">&copy; 2026 SurgiVision VR. Ethical VR Training Systems.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
